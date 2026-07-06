@@ -317,6 +317,21 @@ def parse_about() -> dict:
     }
 
 
+def pick_laboratory_hero_image(images: list[str]) -> str | None:
+    """Hero лабораторії — фото 4:3, не широкий логотип (LOGO-DIOLAB ламає object-fit: cover)."""
+    normalized = [path.replace('\\', '/') for path in images]
+    for path in normalized:
+        lowered = path.lower()
+        if '/laboratoriya/lab-' in lowered:
+            return path
+    for path in normalized:
+        lowered = path.lower()
+        if 'logo' in lowered or 'diolab' in lowered:
+            continue
+        return path
+    return images[0] if images else None
+
+
 def parse_laboratory() -> dict:
     doc = load_markdown('labaratoriia.md')
     seo = seo_by_path('/labaratoriia')
@@ -324,7 +339,7 @@ def parse_laboratory() -> dict:
     return {
         'title': title,
         'body': paragraphs_text(doc),
-        'hero_image': doc.images[0] if doc.images else None,
+        'hero_image': pick_laboratory_hero_image(doc.images),
         **seo,
     }
 

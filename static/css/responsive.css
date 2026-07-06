@@ -58,6 +58,27 @@
     max-width: min(100%, 340px);
   }
 
+  .lab-hero-grid {
+    padding: 32px 0 48px;
+    text-align: center;
+  }
+
+  .lab-hero-grid .badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lab-hero-lead {
+    max-width: 42ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lab-hero-photo {
+    max-width: min(100%, 520px);
+    margin: 8px auto 0;
+  }
+
   .grid-3,
   .diodi-3col {
     --card-cols: 2;

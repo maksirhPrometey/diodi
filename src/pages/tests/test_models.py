@@ -4,7 +4,25 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from src.core.models import SiteSettings
+from src.pages.legacy_import import pick_laboratory_hero_image
 from src.pages.models import LegacyRedirect, Service
+
+
+def test_pick_laboratory_hero_image_skips_logo():
+    images = [
+        '../images/laboratoriya/LOGO-DIOLAB-600.jpg',
+        '../images/laboratoriya/lab-01.jpg',
+        '../images/laboratoriya/lab-02.jpg',
+    ]
+    assert pick_laboratory_hero_image(images).endswith('lab-01.jpg')
+
+
+def test_pick_laboratory_hero_image_prefers_lab_photo():
+    images = [
+        '../images/laboratoriya/lab-03.jpg',
+        '../images/laboratoriya/lab-01.jpg',
+    ]
+    assert pick_laboratory_hero_image(images).endswith('lab-03.jpg')
 
 
 @pytest.mark.django_db
