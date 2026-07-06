@@ -12,13 +12,13 @@
                 <p class="lab-hero-lead">{% for paragraph in lab_body %}{{ paragraph }}{% if not forloop.last %} {% endif %}{% endfor %}</p>
             </div>
             {% if lab_page.hero_image %}
-            <div class="lab-hero-photo">
-                <img class="lab-hero-photo__img" src="{{ lab_page.hero_image.url }}" alt="{{ lab_page.title }}" loading="lazy" width="600" height="450">
+            <div class="lab-hero-photo lab-hero-photo--logo">
+                <img class="lab-hero-photo__img" src="{{ lab_page.hero_image.url }}" alt="Логотип Dio-Lab" loading="lazy" width="600" height="245">
             </div>
             {% else %}
             <div class="media-placeholder media-placeholder--lab">
                 {% include 'includes/icon.html' with name='cube' size=80 %}
-                <span class="media-placeholder__caption">Фото лабораторії · 4:3</span>
+                <span class="media-placeholder__caption">Логотип Dio-Lab</span>
             </div>
             {% endif %}
         </div>

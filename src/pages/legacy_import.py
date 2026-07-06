@@ -318,17 +318,12 @@ def parse_about() -> dict:
 
 
 def pick_laboratory_hero_image(images: list[str]) -> str | None:
-    """Hero лабораторії — фото 4:3, не широкий логотип (LOGO-DIOLAB ламає object-fit: cover)."""
+    """Hero лабораторії — логотип Dio-Lab (як на legacy-сайті), не фото обладнання."""
     normalized = [path.replace('\\', '/') for path in images]
     for path in normalized:
         lowered = path.lower()
-        if '/laboratoriya/lab-' in lowered:
-            return path
-    for path in normalized:
-        lowered = path.lower()
         if 'logo' in lowered or 'diolab' in lowered:
-            continue
-        return path
+            return path
     return images[0] if images else None
 
 
