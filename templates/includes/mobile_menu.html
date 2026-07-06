@@ -1,0 +1,21 @@
+<div class="mobile-drawer" x-show="mobileOpen" x-cloak @click="mobileOpen = false">
+    <nav class="mobile-drawer__panel" @click.stop aria-label="Мобільне меню">
+        <div class="mobile-drawer__head">
+            <span class="mobile-drawer__title">Меню</span>
+            <button type="button" class="mobile-drawer__close" @click="mobileOpen = false" aria-label="Закрити">
+                {% include 'includes/icon.html' with name='close' %}
+            </button>
+        </div>
+        <a class="mobile-drawer__link" href="{% url 'home' %}">Головна</a>
+        <a class="mobile-drawer__link" href="{% url 'about' %}">Про клініку</a>
+        <a class="mobile-drawer__link" href="{% url 'team' %}">Наша команда</a>
+        <a class="mobile-drawer__link" href="{% url 'services' %}">Послуги</a>
+        <a class="mobile-drawer__link" href="{% url 'lab' %}">Лабораторія Dio-Lab</a>
+        <a class="mobile-drawer__link" href="{% url 'prices' %}">Ціни</a>
+        <a class="mobile-drawer__link" href="{% url 'gallery' %}">Фотогалерея</a>
+        <a class="mobile-drawer__link" href="{% url 'reviews' %}">Відгуки</a>
+        <a class="mobile-drawer__link" href="{% url 'contacts' %}">Контакти</a>
+        <a class="mobile-drawer__link mobile-drawer__link--external" href="https://dio-lazer.if.ua" target="_blank" rel="noopener">Лазерна епіляція ↗</a>
+        <a class="mobile-drawer__cta" href="{{ site_settings.phone_primary_href }}">Подзвонити {{ site_settings.phone_primary }}</a>
+    </nav>
+</div>

@@ -1,0 +1,14 @@
+Django>=5.1,<5.2
+python-decouple>=3.8
+Pillow>=10.0
+django-unfold>=0.55,<0.70
+gunicorn>=23.0,<24
+psycopg2-binary>=2.9,<3
+
+# Тестування та верифікація перед деплоєм (django_tdd_skill, django_verification_skill)
+pytest>=8.0
+pytest-django>=4.8
+
+# SAST / CVE-сканування (security_scanning_skill)
+bandit>=1.7
+pip-audit>=2.7

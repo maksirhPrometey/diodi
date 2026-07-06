@@ -1,0 +1,38 @@
+/**
+ * Кольорова палітра бренду «ДіОДі» (legacy diodi.if.ua)
+ * Витягнуто з template.css, bootstrap.css, home.css, megamenu.css
+ * Лише кольори — без typography, spacing, layout
+ */
+:root {
+  /* Primary blue */
+  --color-primary: #006ec7;
+  --color-primary-hover: #0088cc;
+  --color-primary-dark: #0359a2;
+  --color-primary-darker: #003e71;
+
+  /* Secondary / accent lime */
+  --color-accent: #d3dd40;
+  --color-accent-alt: #8eae0b;
+  --color-accent-bright: #e9f35c;
+  --color-accent-muted: #a6b202;
+
+  /* Light blues (links, highlights) */
+  --color-blue-light: #37b5d3;
+  --color-blue-mid: #5796c8;
+  --color-blue-soft: #66afe9;
+
+  /* Backgrounds */
+  --color-bg-cream: #f3f3d5;
+  --color-bg-mint: #f5fae2;
+  --color-bg-white: #fafdfe;
+  --color-bg-gray: #f3f3f3;
+
+  /* Text */
+  --color-text: #333333;
+  --color-text-dark: #1a1a1a;
+  --color-text-muted: #777777;
+
+  /* UI */
+  --color-white: #ffffff;
+  --color-border: #dddddd;
+}

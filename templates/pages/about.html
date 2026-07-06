@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}Про клініку — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}Про стоматологічну клініку «ДіОДі» в Івано-Франківську — команда, обладнання та власна лабораторія Dio-Lab.{% endif %}{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title=about_page.title lead='Стоматологія «ДіОДі» — це команда, обладнання та власна лабораторія, зібрані заради одного: якісного та комфортного лікування для кожного пацієнта.' crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container grid-2 diodi-2col">
+        <div>
+            {% for block in sections %}
+            <article class="about-block{% if not forloop.last %} mb-lg{% endif %}">
+                <h3 class="about-block__title">{{ block.title }}</h3>
+                <p class="about-block__text">{{ block.text }}</p>
+            </article>
+            {% endfor %}
+            <div class="flex-wrap mt-lg">
+                <a class="btn btn--primary" href="{% url 'team' %}">Наша команда</a>
+                <a class="btn btn--outline" href="{% url 'services' %}">Усі послуги</a>
+            </div>
+        </div>
+        <aside class="sticky-aside">
+            {% if about_page.image %}
+            <div class="about-photo mb-lg">
+                <img class="about-photo__img" src="{{ about_page.image.url }}" alt="{{ about_page.title }}" loading="lazy" width="600" height="450">
+            </div>
+            {% else %}
+            <div class="media-placeholder media-placeholder--4-3 bg-gradient-0 mb-lg">
+                {% include 'includes/icon.html' with name='image' size=70 %}
+                <span class="media-placeholder__caption">Фото інтер'єру · 4:3</span>
+            </div>
+            {% endif %}
+            <div class="cta-panel">
+                <div class="stats-grid hero__stats mt-0">
+                    <div><div class="hero__stat-value">2001</div><div class="hero__stat-label">рік заснування</div></div>
+                    <div><div class="hero__stat-value">24+</div><div class="hero__stat-label">роки досвіду</div></div>
+                    <div><div class="hero__stat-value">10</div><div class="hero__stat-label">спеціалістів</div></div>
+                    <div><div class="hero__stat-value">Dio-Lab</div><div class="hero__stat-label">власна лабораторія</div></div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

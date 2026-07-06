@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Відгуки пацієнтів — Стоматологія ДіОДі{% endblock %}
+{% block meta_description %}Реальні відгуки пацієнтів стоматологічної клініки «ДіОДі» в Івано-Франківську про лікування, імплантацію та роботу лікарів.{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title='Відгуки пацієнтів' lead='Що кажуть про нас ті, хто вже довірив нам свою усмішку.' crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container container--reviews">
+        <div class="reviews-grid diodi-reviews">
+            {% for review in reviews %}
+            <article class="review-card">
+                <div class="review-card__stars">
+                    {% for i in review.star_list %}<span>{% include 'includes/icon.html' with name='star' %}</span>{% endfor %}
+                </div>
+                <p class="review-card__text">{{ review.text }}</p>
+                <div class="review-card__author">
+                    <span class="review-card__avatar {{ review.bg_class }}">{{ review.initial }}</span>
+                    <div><strong>{{ review.author }}</strong><div class="review-card__date">{{ review.date }}</div></div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        <div class="cta-panel cta-panel--center mt-xl">
+            <h3>Були у нас? Залиште відгук</h3>
+            <p class="cta-panel__subtitle">Ваша думка допомагає нам ставати кращими.</p>
+            <a class="btn btn--primary" href="{% url 'contacts' %}">Написати відгук</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

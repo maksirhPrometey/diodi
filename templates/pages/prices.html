@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Ціни на стоматологічні послуги — Стоматологія ДіОДі{% endblock %}
+{% block meta_description %}Прейскурант клініки «ДіОДі» в Івано-Франківську: ціни на терапію, ортопедію, імплантацію, гігієну та профілактику. Точна вартість — після консультації.{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title='Ціни' kicker='Прейскурант (грн.)' crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container container--narrow">
+        {% for category in price_categories %}
+        <div class="price-table">
+            <div class="price-table__head">
+                {% include 'includes/icon.html' with name=category.icon size=22 %}
+                <h3>{{ category.title }}</h3>
+            </div>
+            {% for item in category.items %}
+            <div class="price-row diodi-price-row">
+                <span>{{ item.name }}</span>
+                <span class="price-row__value">{{ item.price }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="cta-panel text-note">
+            <p class="mb-lg">Ціни наведені орієнтовно та можуть змінюватися. Точну вартість лікування лікар називає після огляду та складання плану лікування.</p>
+            <p><strong>{% if price_list and price_list.approval_note %}{{ price_list.approval_note }}{% else %}Затверджено: Директор п/п «ДіОДі» О.Д. Джус{% endif %}</strong></p>
+        </div>
+        <div class="text-center mt-xl"><a class="btn btn--primary" href="{% url 'contacts' %}">Записатись на консультацію</a></div>
+    </div>
+</section>
+{% endblock %}

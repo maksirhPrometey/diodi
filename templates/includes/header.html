@@ -1,0 +1,89 @@
+{% load static %}
+<header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-header__logo" href="{% url 'home' %}">
+            <span class="site-header__logo-mark">{% include 'includes/icon.html' with name='tooth' %}</span>
+            <span class="site-header__logo-text">
+                <span class="site-header__logo-title">ДіОДі</span>
+                <span class="site-header__logo-sub">стоматологія · з 2001</span>
+            </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Головна навігація">
+            <a class="site-nav__link{% if nav_active == 'home' %} is-active{% endif %}" href="{% url 'home' %}">Головна</a>
+
+            <div class="site-nav__dropdown site-nav__dropdown--about"
+                 @mouseenter="clearTimeout(aboutCloseTimer); aboutOpen = true; megaOpen = false"
+                 @mouseleave="aboutCloseTimer = setTimeout(() => aboutOpen = false, 280)">
+                <a class="site-nav__link{% if nav_active == 'about' or nav_active == 'team' or nav_active == 'gallery' %} is-active{% endif %}" href="{% url 'about' %}">
+                    Про нас {% include 'includes/icon.html' with name='chevron-down' %}
+                </a>
+                <div class="site-nav__submenu"
+                     x-show="aboutOpen"
+                     x-cloak
+                     @mouseenter="clearTimeout(aboutCloseTimer); aboutOpen = true"
+                     @mouseleave="aboutCloseTimer = setTimeout(() => aboutOpen = false, 280)">
+                    <div class="site-nav__submenu-panel">
+                        <a href="{% url 'about' %}">Про клініку</a>
+                        <a href="{% url 'team' %}">Наша команда</a>
+                        <a href="{% url 'gallery' %}">Фотогалерея</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="site-nav__dropdown site-nav__dropdown--mega"
+                 @mouseenter="clearTimeout(megaCloseTimer); megaOpen = true; aboutOpen = false"
+                 @mouseleave="megaCloseTimer = setTimeout(() => megaOpen = false, 280)">
+                <a class="site-nav__link{% if nav_active == 'services' %} is-active{% endif %}" href="{% url 'services' %}">
+                    Послуги {% include 'includes/icon.html' with name='chevron-down' %}
+                </a>
+                <div class="site-nav__mega-bridge"
+                     x-show="megaOpen"
+                     x-cloak
+                     @mouseenter="clearTimeout(megaCloseTimer); megaOpen = true"
+                     @mouseleave="megaCloseTimer = setTimeout(() => megaOpen = false, 280)"></div>
+                <div class="site-nav__mega"
+                     x-show="megaOpen"
+                     x-cloak
+                     @mouseenter="clearTimeout(megaCloseTimer); megaOpen = true"
+                     @mouseleave="megaCloseTimer = setTimeout(() => megaOpen = false, 280)">
+                    <div class="site-nav__mega-inner">
+                        {% for service in mega_services %}
+                        <div class="site-nav__mega-col">
+                            <a class="site-nav__mega-cat" href="{% url 'service_detail' service.slug %}">
+                                <span class="site-nav__mega-icon">{% include 'includes/icon.html' with name=service.icon size=17 %}</span>
+                                {{ service.title }}
+                            </a>
+                            {% if service.children %}
+                            {% for child in service.children|slice:':4' %}
+                            <a class="site-nav__mega-child" href="{% url 'service_detail' child.slug %}">{{ child.title }}</a>
+                            {% endfor %}
+                            {% else %}
+                            <p class="site-nav__mega-desc">{{ service.desc }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <a class="site-nav__link{% if nav_active == 'lab' %} is-active{% endif %}" href="{% url 'lab' %}">Лабораторія</a>
+            <a class="site-nav__link{% if nav_active == 'prices' %} is-active{% endif %}" href="{% url 'prices' %}">Ціни</a>
+            <a class="site-nav__link{% if nav_active == 'reviews' %} is-active{% endif %}" href="{% url 'reviews' %}">Відгуки</a>
+            <a class="site-nav__link{% if nav_active == 'contacts' %} is-active{% endif %}" href="{% url 'contacts' %}">Контакти</a>
+            <a class="site-nav__link site-nav__link--external" href="https://dio-lazer.if.ua" target="_blank" rel="noopener">
+                Лазерна епіляція {% include 'includes/icon.html' with name='external' %}
+            </a>
+        </nav>
+
+        <div class="site-header__actions">
+            <a class="site-header__phone" href="{{ site_settings.phone_primary_href }}">
+                {% include 'includes/icon.html' with name='phone' %}
+                {{ site_settings.phone_primary }}
+            </a>
+            <button type="button" class="site-header__burger" @click="mobileOpen = true" aria-label="Меню">
+                {% include 'includes/icon.html' with name='menu' %}
+            </button>
+        </div>
+    </div>
+</header>

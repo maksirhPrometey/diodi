@@ -1,0 +1,10 @@
+{% if recaptcha_site_key %}
+<div class="form-recaptcha">
+    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+</div>
+{% else %}
+<div class="form-recaptcha form-recaptcha--dev" aria-hidden="true">
+    <span class="form-recaptcha__box"></span>
+    <span class="form-recaptcha__label">reCAPTCHA не налаштована (режим розробки)</span>
+</div>
+{% endif %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}Фотогалерея — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}{{ gallery_page.description|default:"Фотогалерея клініки «ДіОДі»." }}{% endif %}{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title=gallery_page.title|default:'Фотогалерея' lead=gallery_page.description|default:"Інтер'єр клініки, кабінети та обладнання. Натисніть на фото, щоб збільшити." crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container gallery-grid diodi-gallery-grid">
+        {% for item in gallery %}
+        {% include 'includes/gallery_item.html' %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

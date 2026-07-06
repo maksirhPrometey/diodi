@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}Послуги — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}{{ services_page.intro_text|default:"Повний спектр стоматологічних послуг в одній клініці." }}{% endif %}{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title=services_page.title|default:'Послуги' lead=services_page.intro_text|default:'Повний спектр стоматологічних послуг в одній клініці — оберіть напрямок, щоб дізнатися більше.' crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container services-grid diodi-svc-grid">
+        {% for service in services %}
+        <a class="service-card" href="{% url 'service_detail' service.slug %}">
+            <div class="service-card__head">
+                <span class="service-card__icon">{% include 'includes/icon.html' with name=service.icon %}</span>
+                {% if service.children_count %}<span class="badge badge--mint service-card__count">+{{ service.children_count }} послуг</span>{% endif %}
+            </div>
+            <h3 class="card__title">{{ service.title }}</h3>
+            <p class="card__text">{{ service.desc }}</p>
+            <span class="link-arrow">Переглянути <span>→</span></span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

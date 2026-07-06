@@ -1,0 +1,33 @@
+/* ДіОДі — дрібні доповнення до django-unfold (без !important) */
+
+.unfold-login h1 {
+  letter-spacing: -0.02em;
+}
+
+textarea.vLargeTextField,
+textarea {
+  min-height: 140px;
+}
+
+.field-body textarea,
+.field-why_us_text textarea,
+.field-bio textarea,
+.field-intro_text textarea {
+  min-height: 220px;
+}
+
+.inline-group .tabular td.field-image input[type="file"] {
+  max-width: 100%;
+}
+
+.admin-preview {
+  display: block;
+  max-height: 120px;
+  width: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 62, 113, 0.12);
+}
+
+.admin-preview--lg {
+  max-height: 180px;
+}

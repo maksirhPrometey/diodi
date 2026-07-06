@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}Стоматологія ДіОДі — клініка в Івано-Франківську{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}Повний спектр стоматологічних послуг в Івано-Франківську з 2001 року. Імплантація, терапія, ортопедія, 3D сканер, власна лабораторія Dio-Lab.{% endif %}{% endblock %}
+
+{% block content %}
+<section class="section section--hero-bg">
+    <div class="container hero">
+        <div class="hero__grid diodi-hero">
+            <div class="hero__content">
+                <span class="badge badge--hero"><span class="badge__dot"></span>Івано-Франківськ · на ринку 25+ років</span>
+                <h1 class="hero__title">{% if home_page %}{{ home_page.hero_title }}{% else %}Вас вітає клініка сучасної стоматології «ДІОДІ»{% endif %}</h1>
+                <p class="hero__lead">{{ hero_lead }}</p>
+                <div class="hero__actions flex-wrap">
+                    <a class="btn btn--primary" href="{% url 'contacts' %}">Записатись на прийом {% include 'includes/icon.html' with name='arrow-right' %}</a>
+                    <a class="btn btn--outline" href="{{ site_settings.phone_primary_href }}">{% include 'includes/icon.html' with name='phone' %} Подзвонити</a>
+                </div>
+                <div class="hero__stats">
+                    <div><div class="hero__stat-value">25+</div><div class="hero__stat-label">років досвіду</div></div>
+                    <div><div class="hero__stat-value">{{ team_count|default:10 }}</div><div class="hero__stat-label">спеціалістів</div></div>
+                    <div><div class="hero__stat-value">Dio-Lab</div><div class="hero__stat-label">власна лабораторія</div></div>
+                </div>
+            </div>
+            <div class="hero__media">
+                {% if hero_image_url %}
+                <div class="hero__image hero__image--photo">
+                    <img class="hero__image__img" src="{{ hero_image_url }}" alt="3D сканування у клініці «ДіОДі»" loading="eager" fetchpriority="high" width="400" height="500">
+                </div>
+                {% else %}
+                <div class="hero__image media-placeholder">
+                    {% include 'includes/icon.html' with name='tooth' size=120 %}
+                    <span class="media-placeholder__caption">Фото інтер'єру клініки · 4:5</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head section-head--center">
+            {% if benefits_title %}
+            <h2 class="section-head__title">{{ benefits_title }}</h2>
+            {% endif %}
+            {% if benefits_lead %}
+            <p class="section-head__text">{{ benefits_lead }}</p>
+            {% endif %}
+        </div>
+        {% if benefits %}
+        <div class="grid-3 diodi-3col">
+            {% for item in benefits %}
+            <article class="card">
+                <span class="card__icon card__icon--blue">{% include 'includes/icon.html' with name=item.icon %}</span>
+                <h3 class="card__title">{{ item.title }}</h3>
+                <p class="card__text">{{ item.text }}</p>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section section--mint">
+    <div class="container grid-2 diodi-2col">
+        <div>
+            <h2 class="section-head__title">{% if home_page and home_page.why_us_title %}{{ home_page.why_us_title }}{% else %}Чому обирають нас?{% endif %}</h2>
+            {% if home_page and home_page.why_us_text %}
+            <p class="section-head__text section-head__text--why">{{ home_page.why_us_text }}</p>
+            {% endif %}
+            {% if why_points %}
+            <ul class="check-list">
+                {% for point in why_points %}
+                <li><span class="check-list__icon">{% include 'includes/icon.html' with name='check' %}</span>{{ point }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% if why_image_url %}
+        <div class="section-media section-media--4-3">
+            <img class="section-media__img" src="{{ why_image_url }}" alt="3D сканер у клініці «ДіОДі»" loading="lazy" width="600" height="450">
+        </div>
+        {% else %}
+        <div class="media-placeholder media-placeholder--4-3 bg-gradient-1">
+            {% include 'includes/icon.html' with name='scan' size=90 %}
+            <span class="media-placeholder__caption">Фото: робота з 3D сканером · 4:3</span>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <div><h2 class="section-head__title">Наша клініка</h2>{% if gallery_intro %}<p class="section-head__text">{{ gallery_intro }}</p>{% endif %}</div>
+            <a class="link-arrow" href="{% url 'gallery' %}">Вся галерея <span>→</span></a>
+        </div>
+        <div class="gallery-grid diodi-home-gallery">
+            {% for item in home_gallery %}
+            {% include 'includes/gallery_item.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section promo-blue">
+    <div class="container grid-2 diodi-2col">
+        <div>
+            <span class="badge badge--mint">{% if home_page and home_page.implant_cta_text %}{{ home_page.implant_cta_text }}{% else %}Імплантологія{% endif %}</span>
+            <h2>Увага! Вибір за Вами! Імплантація — це правильний вибір!</h2>
+            <p>{% if home_page and home_page.implant_description %}{{ home_page.implant_description }}{% else %}Імплантат замінює корінь втраченого зуба, на нього кріпиться абатмент, а зверху — коронка або протез.{% endif %}</p>
+            <div class="implant-steps">
+                <div class="implant-step"><span class="implant-step__num">1</span><span class="implant-step__label">Імплантат</span></div>
+                <div class="implant-step"><span class="implant-step__num">2</span><span class="implant-step__label">Абатмент</span></div>
+                <div class="implant-step"><span class="implant-step__num">3</span><span class="implant-step__label">Коронка / протез</span></div>
+            </div>
+            <a class="btn btn--accent" href="{% url 'service_detail' 'implantolohiia' %}">Про імплантацію {% include 'includes/icon.html' with name='arrow-right' %}</a>
+        </div>
+        {% if home_page and home_page.implant_image %}
+        <div class="section-media section-media--promo">
+            <img class="section-media__img" src="{{ home_page.implant_image.url }}" alt="Імплантологія «ДіОДі»" loading="lazy" width="480" height="480">
+        </div>
+        {% else %}
+        <div class="media-placeholder media-placeholder--promo">
+            {% include 'includes/icon.html' with name='implant' size=90 %}
+            <span class="media-placeholder__caption">Схема імплантації · 1:1</span>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head section-head--center">
+            <h2 class="section-head__title">Наші послуги</h2>
+            {% if services_intro %}
+            <p class="section-head__text">{{ services_intro|truncatechars:220 }}</p>
+            {% endif %}
+        </div>
+        <div class="services-grid diodi-svc-grid">
+            {% for service in services %}
+            <a class="service-card" href="{% url 'service_detail' service.slug %}">
+                <span class="card__icon card__icon--lime">{% include 'includes/icon.html' with name=service.icon %}</span>
+                <h3 class="card__title">{{ service.title }}</h3>
+                <p class="card__text">{{ service.desc }}</p>
+                <span class="link-arrow">Детальніше <span>→</span></span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section--gray">
+    <div class="container">
+        <div class="section-head">
+            <div><h2 class="section-head__title">Наша команда</h2></div>
+            <a class="link-arrow" href="{% url 'team' %}">Вся команда <span>→</span></a>
+        </div>
+        <div class="team-teaser-grid diodi-team-teaser">
+            {% for member in team_teaser %}
+            <a class="team-card" href="{% url 'team_member' member.slug %}">
+                <span class="team-card__photo bg-gradient-0{% if member.photo_url %} team-card__photo--image{% endif %}">
+                    {% if member.photo_url %}
+                    <img class="team-card__img" src="{{ member.photo_url }}" alt="{{ member.name }}" loading="lazy" width="320" height="320">
+                    {% else %}
+                    <span class="team-card__initials">{{ member.name|slice:':2' }}</span>
+                    {% endif %}
+                </span>
+                <span class="team-card__body"><span class="team-card__name">{{ member.name }}</span><span class="team-card__role">{{ member.role }}</span></span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head section-head--center">
+            <h2 class="section-head__title">Зв'яжіться з нами</h2>
+            <p class="section-head__text">Замовте зворотний дзвінок або напишіть нам — ми відповімо якнайшвидше.</p>
+        </div>
+        <div class="grid-dual diodi-dual-forms">
+            {% include 'includes/contact_form_callback.html' with form=callback_form %}
+            {% include 'includes/contact_form_email.html' with form=email_form %}
+        </div>
+    </div>
+</section>
+{% endblock %}

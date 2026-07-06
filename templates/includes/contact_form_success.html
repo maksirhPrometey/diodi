@@ -1,0 +1,12 @@
+<div class="form-card" id="{{ form_id }}">
+    <div class="form-success">
+        <span class="form-success__icon">{% include 'includes/icon.html' with name='success' %}</span>
+        <h3 class="form-card__title">Дякуємо!</h3>
+        <p>Ваше повідомлення відправлено. Ми звʼяжемося з вами найближчим часом.</p>
+        <button type="button"
+                class="btn btn--outline btn--sm"
+                hx-get="{% url 'contact_form_partial' form_variant %}"
+                hx-target="#{{ form_id }}"
+                hx-swap="outerHTML">Надіслати ще</button>
+    </div>
+</div>

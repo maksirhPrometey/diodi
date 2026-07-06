@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}{{ service.title }} — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}{{ service.desc }}{% endif %}{% endblock %}
+{% block content %}
+<section class="section">
+    <div class="container">
+        {% include 'includes/breadcrumbs.html' with crumbs=breadcrumbs %}
+        <div class="service-detail-grid diodi-svc-detail section-top-gap">
+            <div>
+                <h1 class="profile__title">{{ service.title }}</h1>
+                {% if service.image_url %}
+                <div class="service-photo media-placeholder media-placeholder--16-9">
+                    <img class="service-photo__img" src="{{ service.image_url }}" alt="{{ service.title }}" loading="lazy" width="960" height="540">
+                </div>
+                {% else %}
+                <div class="media-placeholder media-placeholder--16-9 {{ service.bg_class }}">
+                    {% include 'includes/icon.html' with name=service.icon size=72 %}
+                    <span class="media-placeholder__caption">Фото · 16:9</span>
+                </div>
+                {% endif %}
+                {% for paragraph in service.body %}
+                <p class="text-body">{{ paragraph }}</p>
+                {% endfor %}
+                {% if service.children %}
+                <div class="mt-xl">
+                    <h2 class="service-section-title">Напрямки лікування</h2>
+                    <div class="grid-2 diodi-2col">
+                        {% for child in service.children %}
+                        <a class="service-child" href="{% url 'service_detail' child.slug %}">
+                            <span><strong>{{ child.title }}</strong><br><small>{{ child.short }}</small></span>
+                            <span>→</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="flex-wrap mt-xl">
+                    <a class="btn btn--primary" href="{% url 'contacts' %}">Записатись на прийом</a>
+                    <a class="btn btn--outline" href="{% url 'prices' %}">Переглянути ціни</a>
+                </div>
+                {% endif %}
+            </div>
+            <aside class="sticky-aside">
+                <div class="promo-blue consult-box">
+                    <h4>Потрібна консультація?</h4>
+                    <p>Зателефонуйте — ми підберемо зручний час.</p>
+                    <a class="btn btn--accent btn--block" href="{{ site_settings.phone_primary_href }}">{{ site_settings.phone_primary }}</a>
+                </div>
+                <div class="profile-sidebar">
+                    <h4 class="sidebar-title">Інші послуги</h4>
+                    <div class="sidebar-list">
+                        {% for item in other_services %}
+                        <a href="{% url 'service_detail' item.slug %}">{{ item.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Наша команда — лікарі та спеціалісти — Стоматологія ДіОДі{% endblock %}
+{% block meta_description %}Команда стоматологів, зубних техніків та медичного персоналу клініки «ДіОДі» в Івано-Франківську — досвід понад 24 роки.{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title='Наша команда' lead='Лікарі-стоматологи, зубні техніки та медичний персонал з досвідом понад 24 роки. Натисніть на картку, щоб дізнатися більше.' crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container">
+        <div class="team-grid diodi-team-grid">
+            {% for member in team %}
+            <a class="team-card" href="{% url 'team_member' member.slug %}">
+                <span class="team-card__photo {{ member.bg_class }}{% if member.photo_url %} team-card__photo--image{% endif %}">
+                    {% if member.photo_url %}
+                    <img class="team-card__img" src="{{ member.photo_url }}" alt="{{ member.name }}" loading="lazy" width="320" height="320">
+                    {% else %}
+                    <span class="team-card__initials">{{ member.initials }}</span>
+                    {% endif %}
+                    <span class="team-card__more">Детальніше →</span>
+                </span>
+                <span class="team-card__body"><span class="team-card__name">{{ member.name }}</span><span class="team-card__role">{{ member.role }}</span></span>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="cta-panel cta-panel--center mt-xxl">
+            <h3 class="cta-panel__title">Готові записатись на прийом?</h3>
+            <p class="cta-panel__subtitle">Зателефонуйте нам або замовте зворотний дзвінок.</p>
+            <div class="flex-wrap flex-center">
+                <a class="btn btn--primary" href="{{ site_settings.phone_primary_href }}">{{ site_settings.phone_primary }}</a>
+                <a class="btn btn--outline" href="{{ site_settings.phone_secondary_href }}">{{ site_settings.phone_secondary }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

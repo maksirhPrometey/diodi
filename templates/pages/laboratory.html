@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}Лабораторія Dio-Lab — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}{{ lab_page.body|truncatechars:160 }}{% endif %}{% endblock %}
+{% block content %}
+<section class="section promo-blue">
+    <div class="container page-hero">
+        {% include 'includes/breadcrumbs.html' with crumbs=breadcrumbs extra_class='breadcrumbs--light' %}
+        <div class="grid-2 diodi-2col lab-hero-grid">
+            <div>
+                <span class="badge badge--mint">CAD / CAM</span>
+                <h1 class="page-hero__title">{{ lab_page.title }}</h1>
+                <p class="lab-hero-lead">{% for paragraph in lab_body %}{{ paragraph }}{% if not forloop.last %} {% endif %}{% endfor %}</p>
+            </div>
+            {% if lab_page.hero_image %}
+            <div class="lab-hero-photo">
+                <img class="lab-hero-photo__img" src="{{ lab_page.hero_image.url }}" alt="{{ lab_page.title }}" loading="lazy" width="720" height="540">
+            </div>
+            {% else %}
+            <div class="media-placeholder media-placeholder--lab">
+                {% include 'includes/icon.html' with name='cube' size=80 %}
+                <span class="media-placeholder__caption">Фото лабораторії · 4:3</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        {% if lab_features %}
+        <div class="grid-3 diodi-3col mb-xl">
+            {% for item in lab_features %}
+            <article class="card">
+                <span class="card__icon card__icon--lime">{% include 'includes/icon.html' with name=item.icon %}</span>
+                <h3 class="card__title">{{ item.title }}</h3>
+                <p class="card__text">{{ item.text }}</p>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <h2 class="lab-section-title">Обладнання та роботи</h2>
+        <div class="gallery-grid diodi-home-gallery gallery-grid--square mb-xl">
+            {% for item in lab_gallery %}
+            {% include 'includes/gallery_item.html' %}
+            {% endfor %}
+        </div>
+        {% if lab_cta_text %}
+        <div class="cta-panel cta-panel--row">
+            <div><p class="text-note">{{ lab_cta_text }}</p></div>
+            <a class="btn btn--primary" href="{% url 'contacts' %}">Записатись</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

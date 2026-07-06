@@ -1,0 +1,35 @@
+<div class="form-card" id="form-callback">
+    <form class="form-stack"
+          method="post"
+          action="{% url 'contacts' %}"
+          hx-post="{% url 'contact_form_partial' 'callback' %}"
+          hx-target="#form-callback"
+          hx-swap="outerHTML">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="callback">
+        <div class="form-card__head">
+            <span class="form-card__icon">{% include 'includes/icon.html' with name='phone' %}</span>
+            <div>
+                <h3 class="form-card__title">Замовити дзвінок</h3>
+                <p class="form-card__subtitle">Ми передзвонимо вам</p>
+            </div>
+        </div>
+        <div class="form-field">
+            <label for="id_callback_name">Імʼя <span class="form-field__req">*</span></label>
+            <input type="text" name="name" id="id_callback_name" value="{{ form.name.value|default:'' }}" placeholder="Ваше імʼя" class="{% if form.name.errors %}is-error{% endif %}" autocomplete="name" required>
+            {% for error in form.name.errors %}<span class="form-field__error">{{ error }}</span>{% endfor %}
+        </div>
+        <div class="form-field">
+            <label for="id_callback_phone">Телефон <span class="form-field__req">*</span></label>
+            <input type="tel" name="phone" id="id_callback_phone" value="{{ form.phone.value|default:'' }}" placeholder="+38 (0__) ___-__-__" class="{% if form.phone.errors %}is-error{% endif %}" inputmode="tel" autocomplete="tel" required>
+            {% for error in form.phone.errors %}<span class="form-field__error">{{ error }}</span>{% endfor %}
+        </div>
+        <div class="form-field">
+            <label for="id_callback_message">Повідомлення <span class="form-field__req">*</span></label>
+            <textarea name="message" id="id_callback_message" placeholder="Коротко опишіть ваше питання" class="{% if form.message.errors %}is-error{% endif %}" rows="3" required>{{ form.message.value|default:'' }}</textarea>
+            {% for error in form.message.errors %}<span class="form-field__error">{{ error }}</span>{% endfor %}
+        </div>
+        {% include 'includes/contact_form_recaptcha.html' %}
+        <button type="submit" class="form-submit">ВІДПРАВИТИ</button>
+    </form>
+</div>

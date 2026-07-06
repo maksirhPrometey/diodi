@@ -1,0 +1,13 @@
+<section class="section--page-hero">
+    <div class="container page-hero">
+        {% if crumbs %}
+        <div class="page-hero__crumbs">
+            {% include 'includes/breadcrumbs.html' %}
+        </div>
+        {% endif %}
+        <h1 class="page-hero__title">{{ title }}</h1>
+        {% if kicker %}<p class="page-hero__kicker">{{ kicker }}</p>{% endif %}
+        {% if lead %}<p class="page-hero__lead">{{ lead }}</p>{% endif %}
+        {% if subtitle %}<p class="badge badge--mint">{{ subtitle }}</p>{% endif %}
+    </div>
+</section>

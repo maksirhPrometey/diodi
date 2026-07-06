@@ -1,0 +1,11 @@
+<button type="button"
+        class="gallery-item {{ item.bg_class }}{% if item.image_url %} gallery-item--photo{% endif %}"
+        data-lightbox="{{ item.label }}"
+        {% if item.image_url %}data-image-url="{{ item.image_url }}"{% endif %}>
+    {% if item.image_url %}
+    <img class="gallery-item__img" src="{{ item.image_url }}" alt="{{ item.label }}" loading="lazy" width="400" height="300">
+    {% else %}
+    <span class="gallery-item__icon">{% include 'includes/icon.html' with name='image' %}</span>
+    {% endif %}
+    <span class="gallery-item__label">{{ item.label }}</span>
+</button>

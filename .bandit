@@ -1,0 +1,4 @@
+[bandit]
+exclude = /tests,/migrations,/.venv,/venv
+# B101 assert_used — легітимно у тестах Django/pytest
+skips = B101

@@ -1,0 +1,55 @@
+<footer class="site-footer">
+    <div class="site-footer__grid diodi-footer-grid">
+        <div>
+            <div class="site-footer__brand">
+                <span class="site-footer__brand-mark">{% include 'includes/icon.html' with name='tooth' size=22 %}</span>
+                <span class="site-footer__brand-title">ДіОДі</span>
+            </div>
+            {% if footer_text %}
+            <p class="site-footer__text">{{ footer_text }}</p>
+            {% endif %}
+            <a class="site-footer__link" href="{{ site_settings.phone_primary_href }}">{{ site_settings.phone_primary_display }}</a>
+            {% if site_settings.phone_secondary %}
+            <a class="site-footer__link" href="{{ site_settings.phone_secondary_href }}">{{ site_settings.phone_secondary_display }}</a>
+            {% endif %}
+            <a class="site-footer__email" href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+        </div>
+        <div>
+            <h4 class="site-footer__heading">Про нас</h4>
+            <div class="site-footer__nav">
+                <a href="{% url 'about' %}">Про клініку</a>
+                <a href="{% url 'team' %}">Наша команда</a>
+                <a href="{% url 'gallery' %}">Фотогалерея</a>
+                <a href="{% url 'contacts' %}">Контакти</a>
+            </div>
+        </div>
+        <div>
+            <h4 class="site-footer__heading">Послуги</h4>
+            <div class="site-footer__nav">
+                {% for service in footer_services %}
+                <a href="{% url 'service_detail' service.slug %}">{{ service.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            {% if social_links %}
+            <h4 class="site-footer__heading">Ми в соцмережах</h4>
+            <div class="site-footer__socials">
+                {% for link in social_links %}
+                <a class="site-footer__social" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.label }}">{% include 'includes/icon.html' with name=link.platform size=22 %}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% for link in external_links %}
+            <a class="site-footer__laser" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }} ↗</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="site-footer__bottom">
+        <div class="site-footer__bottom-inner">
+            <span>{{ site_settings.copyright_text }}</span>
+            <span class="site-footer__schedule">Пн–Пт {{ site_settings.schedule_weekdays }} · Сб {{ site_settings.schedule_saturday }} · Нд {{ site_settings.schedule_sunday }}</span>
+            <a class="site-footer__credit" href="https://prometeylabs.com" target="_blank" rel="noopener noreferrer">Розроблено PrometeyLabs</a>
+        </div>
+    </div>
+</footer>

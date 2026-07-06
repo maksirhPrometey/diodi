@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>{% block title %}Стоматологія ДіОДі{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Повний спектр стоматологічних послуг в Івано-Франківську з 2001 року. Імплантація, терапія, ортопедія, 3D сканер, власна лабораторія Dio-Lab.{% endblock %}">
+    <link rel="canonical" href="{% block canonical %}{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% endblock %}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Стоматологія «ДіОДі»">
+    <meta property="og:locale" content="uk_UA">
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+    <meta property="og:title" content="{% block og_title %}{{ meta_title|default:'Стоматологія «ДіОДі» — Івано-Франківськ' }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ meta_description|default:'Повний спектр стоматологічних послуг в Івано-Франківську з 2001 року. Імплантація, терапія, ортопедія, 3D сканер, власна лабораторія Dio-Lab.' }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% if og_image_url %}{{ request.scheme }}://{{ request.get_host }}{{ og_image_url }}{% elif site_settings.default_og_image %}{{ request.scheme }}://{{ request.get_host }}{{ site_settings.default_og_image.url }}{% else %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/apple-touch-icon.png' %}{% endif %}{% endblock %}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'img/favicon-32.png' %}" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% if recaptcha_site_key %}<script src="https://www.google.com/recaptcha/api.js?hl=uk" async defer></script>{% endif %}
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+<div class="site-wrapper" x-data="{ mobileOpen: false, aboutOpen: false, megaOpen: false, aboutCloseTimer: null, megaCloseTimer: null }" @keydown.escape.window="mobileOpen = false; aboutOpen = false; megaOpen = false">
+    {% include 'includes/header.html' %}
+    {% include 'includes/mobile_menu.html' %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    <button type="button" class="scroll-top" data-scroll-top aria-label="Догори">
+        {% include 'includes/icon.html' with name='arrow-up' %}
+    </button>
+</div>
+
+{% if dentist_schema_json %}<script type="application/ld+json">{{ dentist_schema_json|safe }}</script>{% endif %}
+{% if schema_json %}<script type="application/ld+json">{{ schema_json|safe }}</script>{% endif %}
+
+<script defer src="{% static 'js/htmx.min.js' %}"></script>
+<script defer src="{% static 'js/alpine.min.js' %}"></script>
+<script defer src="{% static 'js/utils.js' %}"></script>
+<script defer src="{% static 'js/menu.js' %}"></script>
+<script defer src="{% static 'js/form.js' %}"></script>
+<script defer src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

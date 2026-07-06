@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}Контакти — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}{{ contacts_page.intro_text|default:"Контакти стоматології «ДіОДі» в Івано-Франківську." }}{% endif %}{% endblock %}
+{% block content %}
+{% include 'includes/page_hero.html' with title=contacts_page.title|default:'Контакти' lead=contacts_page.intro_text|default:'Зателефонуйте, напишіть або завітайте до нас — ми завжди раді допомогти.' crumbs=breadcrumbs %}
+<section class="section">
+    <div class="container">
+        <div class="contacts-top-grid diodi-contacts-top mb-xl">
+            <div class="stack">
+                <div class="contact-card">
+                    <span class="card__icon">{% include 'includes/icon.html' with name='phone' size=24 %}</span>
+                    <div class="contact-card__body">
+                        <div class="contact-card__label">Телефони</div>
+                        <div class="contact-card__phones">
+                            <a class="contact-card__value" href="{{ site_settings.phone_primary_href }}">{{ site_settings.phone_primary_display }}</a>
+                            {% if site_settings.phone_secondary %}
+                            <a class="contact-card__value" href="{{ site_settings.phone_secondary_href }}">{{ site_settings.phone_secondary_display }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="card__icon">{% include 'includes/icon.html' with name='mail' size=24 %}</span>
+                    <div class="contact-card__body">
+                        <div class="contact-card__label">Email</div>
+                        <a class="contact-card__value" href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <span class="card__icon">{% include 'includes/icon.html' with name='clock' size=24 %}</span>
+                    <div class="contact-card__body">
+                        <div class="contact-card__label">Графік роботи</div>
+                        <div class="schedule-row"><span>Пн–Пт</span><strong>{{ site_settings.schedule_weekdays }}</strong></div>
+                        <div class="schedule-row"><span>Субота</span><strong>{{ site_settings.schedule_saturday }}</strong></div>
+                        <div class="schedule-row schedule-row--muted"><span>Неділя</span><strong>{{ site_settings.schedule_sunday }}</strong></div>
+                    </div>
+                </div>
+            </div>
+            <div class="map-embed">
+                <iframe title="Мапа — Стоматологія ДіОДі" src="{{ site_settings.map_embed_url }}" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="grid-dual diodi-dual-forms">
+            {% include 'includes/contact_form_callback.html' with form=callback_form %}
+            {% include 'includes/contact_form_email.html' with form=email_form %}
+        </div>
+    </div>
+</section>
+{% endblock %}

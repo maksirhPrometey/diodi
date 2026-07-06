@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{% if meta_title %}{{ meta_title }}{% else %}{{ member.name }} — {{ member.role }} — Стоматологія ДіОДі{% endif %}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% else %}{{ member.name }} — {{ member.role }} у стоматологічній клініці «ДіОДі», Івано-Франківськ.{% endif %}{% endblock %}
+{% block content %}
+<section class="section">
+    <div class="container">
+        {% include 'includes/breadcrumbs.html' with crumbs=breadcrumbs %}
+        <div class="profile-grid diodi-profile section-top-gap">
+            <aside class="sticky-aside">
+                {% if member.photo_url %}
+                <div class="media-placeholder media-placeholder--1-1 profile-photo">
+                    <img class="profile-photo__img" src="{{ member.photo_url }}" alt="{{ member.name }}" loading="lazy" width="480" height="480">
+                </div>
+                {% else %}
+                <div class="media-placeholder media-placeholder--1-1 {{ member.bg_class }}">
+                    <span class="team-card__initials profile-initials--lg">{{ member.initials }}</span>
+                </div>
+                {% endif %}
+                {% if member.is_doctor %}
+                <div class="profile-sidebar">
+                    <h4 class="sidebar-title">Записатись до лікаря</h4>
+                    <div class="profile-sidebar__phones">
+                        <a class="profile-sidebar__phone profile-sidebar__phone--primary" href="{{ site_settings.phone_primary_href }}">
+                            {% include 'includes/icon.html' with name='phone' %}{{ site_settings.phone_primary_display }}
+                        </a>
+                        <a class="profile-sidebar__phone profile-sidebar__phone--outline" href="{{ site_settings.phone_secondary_href }}">{{ site_settings.phone_secondary_display }}</a>
+                    </div>
+                </div>
+                {% endif %}
+            </aside>
+            <div>
+                <h1 class="profile__title">{{ member.name }}</h1>
+                <p class="profile-role">{{ member.role }}</p>
+                {% for paragraph in member.bio %}
+                <p class="text-body">{{ paragraph }}</p>
+                {% endfor %}
+                {% if member.related_services %}
+                <div class="mt-xl">
+                    <h4 class="sidebar-title">Напрямки роботи</h4>
+                    <div class="flex-wrap">
+                        {% for svc in member.related_services %}
+                        <a class="tag-link" href="{% url 'service_detail' svc.slug %}">{{ svc.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
