@@ -80,19 +80,35 @@ def service_icon(service):
     return SERVICE_ICONS.get(service.slug, 'tooth')
 
 
+def _price_currency_suffix(item: PriceItem, currency: str) -> str:
+    note = (item.note or '').lower()
+    if 'у.о' in note:
+        return 'у.о.'
+    return currency or 'грн.'
+
+
+def _format_amount(value) -> str:
+    formatted = f'{value:,.2f}'.replace(',', ' ')
+    if formatted.endswith('.00'):
+        return formatted[:-3]
+    return formatted
+
+
 def format_price(item: PriceItem, currency='грн.'):
+    suffix = _price_currency_suffix(item, currency)
+
     if item.price_type == PriceItem.PriceType.FROM:
         if item.price is not None:
-            return f'від {item.price:,.2f}'.replace(',', ' ').replace('.00', '.00')
-        return 'від —'
+            return f'від {_format_amount(item.price)} {suffix}'
+        return f'від — {suffix}' if suffix else 'від —'
     if item.price_type == PriceItem.PriceType.RANGE:
         if item.price is not None and item.price_max is not None:
-            low = f'{item.price:,.2f}'.replace(',', ' ')
-            high = f'{item.price_max:,.2f}'.replace(',', ' ')
-            return f'{low} – {high}'
+            low = _format_amount(item.price)
+            high = _format_amount(item.price_max)
+            return f'{low} – {high} {suffix}'
         return '—'
     if item.price is not None:
-        return f'{item.price:,.2f}'.replace(',', ' ')
+        return f'{_format_amount(item.price)} {suffix}'
     return '—'
 
 

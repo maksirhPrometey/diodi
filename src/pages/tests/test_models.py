@@ -4,9 +4,34 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from src.core.models import SiteSettings
-from src.pages.cms import parse_about_sections
+from src.pages.cms import parse_about_sections, format_price
 from src.pages.legacy_import import pick_laboratory_hero_image
-from src.pages.models import LegacyRedirect, Service
+from src.pages.models import LegacyRedirect, PriceItem, Service
+
+
+def test_format_price_appends_grn():
+    item = PriceItem(name='Консультація', price_type=PriceItem.PriceType.EXACT, price=450)
+    assert format_price(item) == '450 грн.'
+
+
+def test_format_price_from_range_with_grn():
+    item = PriceItem(
+        name='Видалення',
+        price_type=PriceItem.PriceType.RANGE,
+        price=1000,
+        price_max=3500,
+    )
+    assert format_price(item) == '1 000 – 3 500 грн.'
+
+
+def test_format_price_implant_uses_uo():
+    item = PriceItem(
+        name='Постановка одного імпланту',
+        price_type=PriceItem.PriceType.FROM,
+        price=400,
+        note='у.о',
+    )
+    assert format_price(item) == 'від 400 у.о.'
 
 
 def test_parse_about_sections_plain_paragraphs_have_no_title():
