@@ -56,6 +56,10 @@ TEAM_SLUG_BY_FILE = {
 
 TEAM_DOCTOR_SLUGS = {'labiy', 'skovorodnev'}
 
+TEAM_ROLE_TITLE_OVERRIDES = {
+    'basarab': 'Середній медичний персонал, фахівець екстреної медичної допомоги',
+}
+
 TEAM_ROLE_PREFIXES = (
     'Директор, провідний зубний технік',
     'Cередній медичний персонал',
@@ -491,6 +495,7 @@ def parse_team() -> list[dict]:
         doc = load_markdown(entry['file'])
         title = next((heading['text'] for heading in doc.headings if heading['level'] == 1), doc.meta.get('title', ''))
         role_title, full_name = _split_role_name(title)
+        role_title = TEAM_ROLE_TITLE_OVERRIDES.get(slug, role_title)
         legacy_path = urlparse(doc.meta.get('source_url', '')).path or entry.get('path', '')
         seo = seo_by_file(entry['file'])
         members.append({
