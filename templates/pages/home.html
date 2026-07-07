@@ -37,30 +37,6 @@
     </div>
 </section>
 
-<section class="section">
-    <div class="container">
-        <div class="section-head section-head--center">
-            {% if benefits_title %}
-            <h2 class="section-head__title">{{ benefits_title }}</h2>
-            {% endif %}
-            {% if benefits_lead %}
-            <p class="section-head__text">{{ benefits_lead }}</p>
-            {% endif %}
-        </div>
-        {% if benefits %}
-        <div class="grid-3 diodi-3col">
-            {% for item in benefits %}
-            <article class="card">
-                <span class="card__icon card__icon--blue">{% include 'includes/icon.html' with name=item.icon %}</span>
-                <h3 class="card__title">{{ item.title }}</h3>
-                <p class="card__text">{{ item.text }}</p>
-            </article>
-            {% endfor %}
-        </div>
-        {% endif %}
-    </div>
-</section>
-
 <section class="section section--mint">
     <div class="container grid-2 diodi-2col">
         <div>

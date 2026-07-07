@@ -74,9 +74,10 @@
     margin-right: auto;
   }
 
-  .lab-hero-photo {
+  .lab-hero-photo.lab-hero-photo--logo {
     max-width: min(100%, 520px);
     margin: 8px auto 0;
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 3.5vw, 28px);
   }
 
   .grid-3,

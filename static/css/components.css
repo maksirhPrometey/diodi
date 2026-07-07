@@ -698,43 +698,25 @@
   object-fit: cover;
 }
 
-/* Hero лабораторії: біла картка з логотипом Dio-Lab на синьому фоні */
-.lab-hero-photo {
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-.lab-hero-photo--logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Hero лабораторії: біла картка з логотипом Dio-Lab (широкий 600×245, без crop) */
+.lab-hero-photo.lab-hero-photo--logo {
+  display: block;
   background: var(--white);
-  padding: clamp(20px, 5vw, 36px);
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  padding: clamp(24px, 5vw, 40px) clamp(20px, 4vw, 32px);
+  overflow: visible;
 }
 
-@supports not (aspect-ratio: 4 / 3) {
-  .lab-hero-photo {
-    min-height: 240px;
-  }
-}
-
-.lab-hero-photo__img {
+.lab-hero-photo.lab-hero-photo--logo .lab-hero-photo__img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 auto;
   object-fit: contain;
   object-position: center center;
-}
-
-.lab-hero-photo--logo .lab-hero-photo__img {
-  position: static;
-  width: auto;
-  max-width: 100%;
-  flex-shrink: 0;
 }
 
 .section-media--4-3 .section-media__img {

@@ -323,6 +323,7 @@
 .consult-box h4 { color: var(--white); }
 .consult-box p { color: rgba(255,255,255,0.85); }
 .lab-hero-grid { padding: 44px 0 60px; }
+.lab-hero-grid > * { min-width: 0; }
 .lab-hero-grid .page-hero__title { color: var(--white); }
 .lab-hero-lead { font-size: 18.5px; line-height: 1.6; color: rgba(255,255,255,0.9); }
 .cta-panel--row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-lg); flex-wrap: wrap; }
