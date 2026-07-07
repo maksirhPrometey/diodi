@@ -58,6 +58,7 @@ TEAM_DOCTOR_SLUGS = {'labiy', 'skovorodnev'}
 
 TEAM_ROLE_TITLE_OVERRIDES = {
     'basarab': 'Середній медичний персонал, фахівець екстреної медичної допомоги',
+    'volochiy': 'Середній медичний персонал, спеціаліст із лазерної епіляції',
 }
 
 TEAM_ROLE_PREFIXES = (
