@@ -7,8 +7,10 @@
     <div class="container grid-2 diodi-2col">
         <div>
             {% for block in sections %}
-            <article class="about-block{% if not forloop.last %} mb-lg{% endif %}">
+            <article class="about-block{% if forloop.first and not block.title %} about-block--lead{% endif %}{% if not forloop.last %} mb-lg{% endif %}">
+                {% if block.title %}
                 <h3 class="about-block__title">{{ block.title }}</h3>
+                {% endif %}
                 <p class="about-block__text">{{ block.text }}</p>
             </article>
             {% endfor %}

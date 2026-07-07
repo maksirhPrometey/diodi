@@ -241,6 +241,12 @@
   margin-top: 22px;
 }
 
+.about-block--lead .about-block__text {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #444;
+}
+
 .about-block__title {
   font-size: 21px;
   margin-bottom: 8px;

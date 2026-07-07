@@ -4,8 +4,24 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from src.core.models import SiteSettings
+from src.pages.cms import parse_about_sections
 from src.pages.legacy_import import pick_laboratory_hero_image
 from src.pages.models import LegacyRedirect, Service
+
+
+def test_parse_about_sections_plain_paragraphs_have_no_title():
+    body = 'Перший абзац.\n\nДругий абзац.'
+    sections = parse_about_sections(body)
+    assert len(sections) == 2
+    assert sections[0]['title'] == ''
+    assert sections[1]['title'] == ''
+
+
+def test_parse_about_sections_explicit_title():
+    body = 'Наш підхід\nТекст під заголовком.'
+    sections = parse_about_sections(body)
+    assert sections[0]['title'] == 'Наш підхід'
+    assert sections[0]['text'] == 'Текст під заголовком.'
 
 
 def test_pick_laboratory_hero_image_prefers_logo():

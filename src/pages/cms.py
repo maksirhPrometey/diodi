@@ -63,13 +63,14 @@ def parse_bullet_lines(text):
 
 
 def parse_about_sections(body):
+    """Абзаци без підзаголовка — лише текст; title лише якщо є явний заголовок у блоці."""
     sections = []
     for block in split_paragraphs(body):
         lines = block.split('\n', 1)
-        if len(lines) == 2:
+        if len(lines) == 2 and lines[0].strip() and lines[1].strip():
             sections.append({'title': lines[0].strip(), 'text': lines[1].strip()})
         else:
-            sections.append({'title': 'Про клініку', 'text': block})
+            sections.append({'title': '', 'text': block})
     return sections
 
 
