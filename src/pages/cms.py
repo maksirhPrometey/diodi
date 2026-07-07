@@ -48,6 +48,20 @@ def split_paragraphs(text):
     return [part.strip() for part in text.split('\n\n') if part.strip()]
 
 
+def services_home_intro(intro_text: str) -> str:
+    """Короткий вступ для головної: три речення до «за кожен ваш зуб!»."""
+    if not intro_text:
+        return ''
+    first = split_paragraphs(intro_text)[0]
+    teaser, _, _ = first.partition('Тому в нашій')
+    teaser = teaser.strip()
+    if teaser.endswith('зуб.'):
+        return f'{teaser[:-1]}!'
+    if teaser.endswith('зуб'):
+        return f'{teaser}!'
+    return teaser
+
+
 def parse_bullet_lines(text):
     if not text:
         return []

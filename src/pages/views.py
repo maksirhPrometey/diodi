@@ -26,6 +26,7 @@ from src.pages.cms import (
     seo_context,
     service_ld_data,
     service_to_card,
+    services_home_intro,
     split_paragraphs,
     team_member_to_dict,
     website_schema,
@@ -83,7 +84,7 @@ def home_view(request):
         'home_page': home_page,
         'why_points': parse_bullet_lines(home_page.why_us_text) if home_page else [],
         'services': [service_to_card(s, i) for i, s in enumerate(root_services)],
-        'services_intro': services_index.intro_text if services_index else '',
+        'services_intro': services_home_intro(services_index.intro_text) if services_index else '',
         'gallery_intro': gallery_page.description if gallery_page else '',
         'team_teaser': [
             {

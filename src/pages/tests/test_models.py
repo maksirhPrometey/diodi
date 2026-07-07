@@ -4,9 +4,19 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from src.core.models import SiteSettings
-from src.pages.cms import parse_about_sections, format_price
+from src.pages.cms import parse_about_sections, format_price, services_home_intro
 from src.pages.legacy_import import pick_laboratory_hero_image
 from src.pages.models import LegacyRedirect, PriceItem, Service
+
+
+def test_services_home_intro_ends_with_zub():
+    intro = (
+        'Клініка «ДіОДі» в Івано-Франківську турбується про кожного з пацієнтів. '
+        'Наші лікарі використовують лише сучасні та ефективні методи лікування. '
+        'Ми беремо на себе відповідальність за кожну зроблену роботу, за кожен ваш зуб. '
+        'Тому в нашій клініці ви зможете отримати всі види послуг.'
+    )
+    assert services_home_intro(intro).endswith('за кожен ваш зуб!')
 
 
 def test_format_price_appends_grn():
