@@ -8,7 +8,7 @@
     <div class="container hero">
         <div class="hero__grid diodi-hero">
             <div class="hero__content">
-                <span class="badge badge--hero"><span class="badge__dot"></span>Івано-Франківськ · на ринку {{ site_settings.years_of_experience_label }} років</span>
+                <span class="badge badge--hero"><span class="badge__dot"></span>Івано-Франківськ · {{ site_settings.years_of_experience_label }}</span>
                 <h1 class="hero__title">{% if home_page %}{{ home_page.hero_title }}{% else %}Вас вітає клініка сучасної стоматології «ДІОДІ»{% endif %}</h1>
                 <p class="hero__lead">{{ hero_lead }}</p>
                 <div class="hero__actions flex-wrap">
@@ -16,7 +16,7 @@
                     <a class="btn btn--outline" href="{{ site_settings.phone_primary_href }}">{% include 'includes/icon.html' with name='phone' %} Подзвонити</a>
                 </div>
                 <div class="hero__stats">
-                    <div><div class="hero__stat-value">{{ site_settings.years_of_experience_label }}</div><div class="hero__stat-label">років досвіду</div></div>
+                    <div><div class="hero__stat-value hero__stat-value--years">{{ site_settings.years_of_experience_label }}</div><div class="hero__stat-label">досвіду</div></div>
                     <div><div class="hero__stat-value">{{ team_count }}</div><div class="hero__stat-label">спеціалістів</div></div>
                     <div><div class="hero__stat-value">{{ site_settings.lab_brand_name }}</div><div class="hero__stat-label">власна лабораторія</div></div>
                 </div>

@@ -87,7 +87,8 @@ def test_years_of_experience_label_from_founded_year():
     settings_obj = SiteSettings.load()
     settings_obj.founded_year = 2001
     settings_obj.save()
-    assert settings_obj.years_of_experience_label.endswith('+')
+    assert settings_obj.years_of_experience_label.startswith('понад ')
+    assert settings_obj.years_of_experience_label.endswith(' років')
     assert settings_obj.years_of_experience >= 24
     assert settings_obj.lab_brand_name == 'Dio-Lab'
 

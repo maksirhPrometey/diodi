@@ -475,6 +475,14 @@
   color: var(--primary-dark);
 }
 
+.hero__stat-value--years {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.25;
+  max-width: 9.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .hero__stat-label {
   font-size: 13px;
   color: var(--text-muted);

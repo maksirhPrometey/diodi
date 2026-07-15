@@ -212,6 +212,11 @@
     line-height: 1.1;
   }
 
+  .hero__stat-value--years {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
   .hero__stat-label {
     margin-top: 6px;
   }

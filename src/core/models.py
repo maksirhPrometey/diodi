@@ -98,7 +98,7 @@ class SiteSettings(SingletonModel, SEOMixin):
 
     @property
     def years_of_experience_label(self) -> str:
-        return f'{self.years_of_experience}+'
+        return f'понад {self.years_of_experience} років'
 
     @property
     def phone_primary_href(self):
