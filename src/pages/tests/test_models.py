@@ -83,6 +83,16 @@ def test_singleton_load_creates_pk_one():
 
 
 @pytest.mark.django_db
+def test_years_of_experience_label_from_founded_year():
+    settings_obj = SiteSettings.load()
+    settings_obj.founded_year = 2001
+    settings_obj.save()
+    assert settings_obj.years_of_experience_label.endswith('+')
+    assert settings_obj.years_of_experience >= 24
+    assert settings_obj.lab_brand_name == 'Dio-Lab'
+
+
+@pytest.mark.django_db
 def test_singleton_load_is_idempotent():
     first = SiteSettings.load()
     second = SiteSettings.load()

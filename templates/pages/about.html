@@ -32,10 +32,10 @@
             {% endif %}
             <div class="cta-panel">
                 <div class="stats-grid hero__stats mt-0">
-                    <div><div class="hero__stat-value">2001</div><div class="hero__stat-label">рік заснування</div></div>
-                    <div><div class="hero__stat-value">24+</div><div class="hero__stat-label">роки досвіду</div></div>
-                    <div><div class="hero__stat-value">10</div><div class="hero__stat-label">спеціалістів</div></div>
-                    <div><div class="hero__stat-value">Dio-Lab</div><div class="hero__stat-label">власна лабораторія</div></div>
+                    <div><div class="hero__stat-value">{{ site_settings.founded_year }}</div><div class="hero__stat-label">рік заснування</div></div>
+                    <div><div class="hero__stat-value">{{ site_settings.years_of_experience_label }}</div><div class="hero__stat-label">роки досвіду</div></div>
+                    <div><div class="hero__stat-value">{{ team_count }}</div><div class="hero__stat-label">спеціалістів</div></div>
+                    <div><div class="hero__stat-value">{{ site_settings.lab_brand_name }}</div><div class="hero__stat-label">власна лабораторія</div></div>
                 </div>
             </div>
         </aside>

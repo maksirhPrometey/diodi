@@ -114,6 +114,7 @@ def about_view(request):
         **seo_context(about_page),
         'about_page': about_page,
         'sections': parse_about_sections(about_page.body),
+        'team_count': TeamMember.objects.filter(is_published=True).count(),
         'breadcrumbs': _crumbs(('Про клініку', None)),
     }
     return render(request, 'pages/about.html', context)

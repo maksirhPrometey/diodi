@@ -19,7 +19,16 @@ class SiteSettingsAdmin(SingletonModelAdmin):
 
     fieldsets = (
         ('Бренд', {
-            'fields': ('site_name', 'logo', 'logo_preview', 'copyright_text', 'default_og_image', 'default_og_preview'),
+            'fields': (
+                'site_name',
+                'founded_year',
+                'lab_brand_name',
+                'logo',
+                'logo_preview',
+                'copyright_text',
+                'default_og_image',
+                'default_og_preview',
+            ),
         }),
         ('Контакти', {
             'fields': ('phone_primary', 'phone_secondary', 'email', 'address'),

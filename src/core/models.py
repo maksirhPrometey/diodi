@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 import re
 
 
@@ -70,6 +71,17 @@ class SiteSettings(SingletonModel, SEOMixin):
         blank=True,
         default='© Стоматологія «ДіОДі», Івано-Франківськ',
     )
+    founded_year = models.PositiveSmallIntegerField(
+        'Рік заснування',
+        default=2001,
+        help_text='Для статистики «років досвіду» на головній і в «Про клініку».',
+    )
+    lab_brand_name = models.CharField(
+        'Назва лабораторії',
+        max_length=50,
+        default='Dio-Lab',
+        help_text='Бренд власної зуботехнічної лабораторії (hero / about).',
+    )
     default_og_image = models.ImageField('OG image за замовчуванням', upload_to='seo/', blank=True)
 
     class Meta:
@@ -78,6 +90,15 @@ class SiteSettings(SingletonModel, SEOMixin):
 
     def __str__(self):
         return self.site_name
+
+    @property
+    def years_of_experience(self) -> int:
+        current_year = timezone.now().year
+        return max(current_year - int(self.founded_year or 2001), 0)
+
+    @property
+    def years_of_experience_label(self) -> str:
+        return f'{self.years_of_experience}+'
 
     @property
     def phone_primary_href(self):

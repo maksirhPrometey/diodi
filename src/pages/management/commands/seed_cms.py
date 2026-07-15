@@ -130,6 +130,8 @@ class Command(BaseCommand):
         settings_obj.schedule_weekdays = data['schedule_weekdays']
         settings_obj.schedule_saturday = data['schedule_saturday']
         settings_obj.schedule_sunday = data['schedule_sunday']
+        settings_obj.founded_year = 2001
+        settings_obj.lab_brand_name = 'Dio-Lab'
         copyright_text = parse_copyright_text()
         if copyright_text:
             settings_obj.copyright_text = copyright_text
